@@ -20,6 +20,7 @@ namespace RiotPingTester
 
         private async void button1_Click(object sender, EventArgs e)
         {
+            this.ClearPingResponse("");
             switch(this.comboBox1.SelectedItem.ToString())
             {
                 case "NA" :
@@ -90,6 +91,22 @@ namespace RiotPingTester
             {
                 this.richTextBox1.Text += text;
             }
+        }
+        private void ClearPingResponse(string text)
+        {
+            if (this.richTextBox1.InvokeRequired)
+            {
+                UpdatePingCallback d = new UpdatePingCallback(ClearPingResponse);
+                this.Invoke(d, new object[] { "" });
+            }
+            else
+            {
+                this.richTextBox1.Text = text;
+            }
+        }
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start(@"https://github.com/Kantanomo/RiotPingTester");
         }
     }
 }
